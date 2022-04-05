@@ -82,7 +82,7 @@ export const updateMainCategory = async (req, res) => {
 
 		const category = await MainCategory.update(
 			{
-				name: req.body.name,
+				name: req.body.name.toLowerCase(),
 			},
 			{
 				where: {
