@@ -1,5 +1,6 @@
 import MainCategory from "../models/MainCategory.js";
 import { Validator } from "node-input-validator";
+import { v4 as uuidv4 } from "uuid";
 
 export const createMainCategory = async (req, res) => {
 	try {
@@ -16,10 +17,11 @@ export const createMainCategory = async (req, res) => {
 		}
 
 		const category = await MainCategory.create({
-			name: req.body.name,
+			main_category_id: uuidv4(),
+			name: req.body.name.toLowerCase(),
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Main category was created!",
 			data: category,
@@ -34,7 +36,7 @@ export const findAllMainCategory = async (req, res) => {
 	try {
 		const category = await MainCategory.findAll();
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully to find all data category!",
 			data: category,
@@ -53,7 +55,7 @@ export const findOneMainCategory = async (req, res) => {
 			},
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully find category by id!",
 			data: category,
@@ -89,7 +91,7 @@ export const updateMainCategory = async (req, res) => {
 			}
 		);
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Main category was updated!",
 		});
@@ -107,7 +109,7 @@ export const deleteMainCategory = async (req, res) => {
 			},
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Main category was deleted!",
 		});
