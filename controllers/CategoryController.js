@@ -1,5 +1,6 @@
 import Category from "../models/Category.js";
 import { Validator } from "node-input-validator";
+import { v4 as uuidv4 } from "uuid";
 
 export const createCategory = async (req, res) => {
 	try {
@@ -16,10 +17,11 @@ export const createCategory = async (req, res) => {
 		}
 
 		const category = await Category.create({
-			name: req.body.name,
+			category_id: uuidv4(),
+			name: req.body.name.toLowerCase(),
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Category was created!",
 			data: category,
@@ -34,7 +36,7 @@ export const findAllCategory = async (req, res) => {
 	try {
 		const category = await Category.findAll();
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully find all data category!",
 			data: category,
@@ -61,7 +63,7 @@ export const updateDataCategory = async (req, res) => {
 
 		const category = await Category.update(
 			{
-				name: req.body.name,
+				name: req.body.name.toLowerCase(),
 			},
 			{
 				where: {
@@ -70,7 +72,7 @@ export const updateDataCategory = async (req, res) => {
 			}
 		);
 
-		res.json({
+		res.status(200).json({
 			statu: "true",
 			message: "Category was updated!",
 		});
@@ -88,7 +90,7 @@ export const deleteDataCategory = async (req, res) => {
 			},
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Category was deleted!",
 		});
