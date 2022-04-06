@@ -1,5 +1,6 @@
 import Quantity from "../models/Quantity.js";
 import { Validator } from "node-input-validator";
+import { v4 as uuidv4 } from "uuid";
 
 export const createQuantity = async (req, res) => {
 	try {
@@ -17,10 +18,11 @@ export const createQuantity = async (req, res) => {
 		}
 
 		const quantity = await Quantity.create({
+			quantity_id: uuidv4(),
 			quantity: req.body.quantity,
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Quantity was created!",
 			data: quantity,
@@ -35,7 +37,7 @@ export const findAllQuantity = async (req, res) => {
 	try {
 		const quantity = await Quantity.findAll();
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully find all data quantity!",
 			data: quantity,
@@ -72,7 +74,7 @@ export const updateDataQuantity = async (req, res) => {
 			}
 		);
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Quantity was updated!",
 		});
@@ -90,7 +92,7 @@ export const deleteDataQuantity = async (req, res) => {
 			},
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Quantity was deleted!",
 		});

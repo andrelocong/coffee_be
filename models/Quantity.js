@@ -7,18 +7,11 @@ const Quantity = db.define(
 	"quantities",
 	{
 		quantity_id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 			primaryKey: true,
-			autoIncrement: true,
 		},
 		quantity: {
 			type: DataTypes.STRING,
-		},
-		createdAt: {
-			type: DataTypes.DATE,
-		},
-		updatedAt: {
-			type: DataTypes.DATE,
 		},
 	},
 	{
