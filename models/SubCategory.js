@@ -7,18 +7,11 @@ const SubCategory = db.define(
 	"sub_categories",
 	{
 		sub_category_id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 			primaryKey: true,
-			autoIncrement: true,
 		},
 		name: {
 			type: DataTypes.STRING,
-		},
-		createdAt: {
-			type: DataTypes.DATE,
-		},
-		updatedAt: {
-			type: DataTypes.DATE,
 		},
 	},
 	{

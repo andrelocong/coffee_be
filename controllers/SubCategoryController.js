@@ -1,5 +1,6 @@
 import SubCategory from "../models/SubCategory.js";
 import { Validator } from "node-input-validator";
+import { v4 as uuidv4 } from "uuid";
 
 export const createSubCategory = async (req, res) => {
 	try {
@@ -17,10 +18,11 @@ export const createSubCategory = async (req, res) => {
 		}
 
 		const category = await SubCategory.create({
-			name: req.body.name,
+			sub_category_id: uuidv4(),
+			name: req.body.name.toLowerCase(),
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Sub category was created!",
 			data: category,
@@ -35,7 +37,7 @@ export const findAllSubCategory = async (req, res) => {
 	try {
 		const category = await SubCategory.findAll();
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully find all data sub category!",
 			data: category,
@@ -63,7 +65,7 @@ export const updateDataSubCategory = async (req, res) => {
 
 		const category = await SubCategory.update(
 			{
-				name: req.body.name,
+				name: req.body.name.toLowerCase(),
 			},
 			{
 				where: {
@@ -72,7 +74,7 @@ export const updateDataSubCategory = async (req, res) => {
 			}
 		);
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Sub category was updated!",
 		});
@@ -90,7 +92,7 @@ export const deleteDataSubCategory = async (req, res) => {
 			},
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Sub category was deleted!",
 		});
