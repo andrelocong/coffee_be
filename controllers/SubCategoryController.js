@@ -35,7 +35,9 @@ export const createSubCategory = async (req, res) => {
 
 export const findAllSubCategory = async (req, res) => {
 	try {
-		const category = await SubCategory.findAll();
+		const category = await SubCategory.findAll({
+			order: [["name", "ASC"]],
+		});
 
 		res.status(200).json({
 			status: "true",
