@@ -6,7 +6,7 @@ export const createRoleAccess = async (req, res) => {
 	try {
 		const validator = new Validator(req.body, {
 			menu: "required|string",
-			roleId: "required|string"
+			roleId: "required|string",
 		});
 
 		const check = await validator.check();
@@ -17,21 +17,34 @@ export const createRoleAccess = async (req, res) => {
 				errors: validator.errors,
 			});
 		}
-		
-		const role = await RoleAccess.create({
-			role_access_id: uuidv4(),
-			menu: req.body.menu,
-			can_insert: 0,
-			can_update: 0,
-			can_delete: 0,
-			role_id: req.body.roleId,
+
+		const foundMenu = await RoleAccess.findOne({
+			where: {
+				menu: req.body.menu,
+			},
 		});
 
-		res.json({
-			status: "true",
-			message: "Role access was created!",
-			data: role,
-		});
+		if (!foundMenu || typeof foundMenu === "string") {
+			const role = await RoleAccess.create({
+				role_access_id: uuidv4(),
+				menu: req.body.menu,
+				can_insert: 0,
+				can_update: 0,
+				can_delete: 0,
+				role_id: req.body.roleId,
+			});
+
+			res.status(200).json({
+				status: "true",
+				message: "Role access was created!",
+				data: role,
+			});
+		} else {
+			return res.status(400).json({
+				status: "false",
+				message: "Menu has been used",
+			});
+		}
 	} catch (error) {
 		console.log(error);
 		res.status(500).json("server error...");
@@ -46,7 +59,7 @@ export const findAllRoleAccess = async (req, res) => {
 			},
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully find all role access data!",
 			data: role,
@@ -72,7 +85,7 @@ export const updateDataRoleAccess = async (req, res) => {
 			}
 		);
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Role access was updated!",
 			data: role,
@@ -88,7 +101,7 @@ export const deleteDataRoleAccess = async (req, res) => {
 			},
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Role access was deleted!",
 		});

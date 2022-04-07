@@ -35,7 +35,9 @@ export const createQuantity = async (req, res) => {
 
 export const findAllQuantity = async (req, res) => {
 	try {
-		const quantity = await Quantity.findAll();
+		const quantity = await Quantity.findAll({
+			order: [["quantity", "ASC"]],
+		});
 
 		res.status(200).json({
 			status: "true",
