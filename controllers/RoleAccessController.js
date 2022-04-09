@@ -18,13 +18,15 @@ export const createRoleAccess = async (req, res) => {
 			});
 		}
 
-		const foundMenu = await RoleAccess.findOne({
+		const foundRoleId = await RoleAccess.findAll({
 			where: {
-				menu: req.body.menu,
+				role_id: req.body.roleId,
 			},
 		});
 
-		if (!foundMenu || typeof foundMenu === "string") {
+		const foundMenu = foundRoleId.find((x) => x.menu === req.body.menu);
+
+		if (!foundMenu) {
 			const role = await RoleAccess.create({
 				role_access_id: uuidv4(),
 				menu: req.body.menu,
@@ -42,7 +44,7 @@ export const createRoleAccess = async (req, res) => {
 		} else {
 			return res.status(400).json({
 				status: "false",
-				message: "Menu has been used",
+				message: "Menu has been used 2",
 			});
 		}
 	} catch (error) {
@@ -57,6 +59,7 @@ export const findAllRoleAccess = async (req, res) => {
 			where: {
 				role_id: req.params.id,
 			},
+			order: [["menu", "ASC"]],
 		});
 
 		res.status(200).json({

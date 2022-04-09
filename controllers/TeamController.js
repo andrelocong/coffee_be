@@ -1,5 +1,6 @@
 import Team from "../models/Team.js";
 import { Validator } from "node-input-validator";
+import { v4 as uuidv4 } from "uuid";
 
 export const createTeam = async (req, res) => {
 	try {
@@ -32,13 +33,14 @@ export const createTeam = async (req, res) => {
 			req.file.filename;
 
 		const team = await Team.create({
-			name: req.body.name,
-			position: req.body.position,
+			team_id: uuidv4(),
+			name: req.body.name.toLowerCase(),
+			position: req.body.position.toLowerCase(),
 			desc: req.body.desc,
 			image: finalImageURL,
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Team was created!",
 			data: team,
@@ -53,7 +55,7 @@ export const findALlTeam = async (req, res) => {
 	try {
 		const team = await Team.findAll();
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully to find all data!",
 			data: team,
@@ -72,7 +74,7 @@ export const findDataByIdTeam = async (req, res) => {
 			},
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully find data by id!",
 			data: team,
@@ -101,9 +103,9 @@ export const updateDataTeam = async (req, res) => {
 
 		const team = await Team.update(
 			{
-				name: req.body.name,
-				position: req.body.position,
-				desc: req.body.desc,
+				name: req.body.name.toLowerCase(),
+				position: req.body.position.toLowerCase(),
+				desc: req.body.desc.toLowerCase(),
 			},
 			{
 				where: {
@@ -112,7 +114,7 @@ export const updateDataTeam = async (req, res) => {
 			}
 		);
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Team was updated!",
 		});
@@ -154,7 +156,7 @@ export const updateImageTeam = async (req, res) => {
 			}
 		);
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Team image was update!",
 			image: finalImageURL,
@@ -173,7 +175,7 @@ export const deleteDataTeam = async (req, res) => {
 			},
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Team was deleted",
 		});

@@ -7,9 +7,8 @@ const Team = db.define(
 	"teams",
 	{
 		team_id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 			primaryKey: true,
-			autoIncrement: true,
 		},
 		name: {
 			type: DataTypes.STRING,
@@ -22,12 +21,6 @@ const Team = db.define(
 		},
 		image: {
 			type: DataTypes.STRING,
-		},
-		createdAt: {
-			type: DataTypes.TIME,
-		},
-		updatedAt: {
-			type: DataTypes.TIME,
 		},
 	},
 	{

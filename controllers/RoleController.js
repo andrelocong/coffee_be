@@ -52,7 +52,6 @@ export const findAllRole = async (req, res) => {
 export const findOneRole = async (req, res) => {
 	try {
 		const role = await Role.findOne({
-			include: [RoleAccess],
 			where: {
 				role_id: req.params.id,
 			},
