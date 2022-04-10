@@ -126,9 +126,8 @@ export const updateDataTeam = async (req, res) => {
 
 export const updateImageTeam = async (req, res) => {
 	try {
-		const validator = new Validator(req.file, {
-			image: "required",
-		});
+		const validator = new Validator((req.file.image = "required"));
+
 		const check = await validator.check();
 		if (!check) {
 			return res.status(400).json({
