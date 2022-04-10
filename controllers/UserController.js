@@ -110,7 +110,7 @@ export const updateDataUser = async (req, res) => {
 			firstName: "required|string",
 			lastName: "required|string",
 			username: "required|string",
-			role: "required|integer",
+			role: "required|string",
 			email: "email",
 			phone: "string",
 		});
@@ -151,9 +151,7 @@ export const updateDataUser = async (req, res) => {
 
 export const updateImageUser = async (req, res) => {
 	try {
-		const validator = new Validator(req.file, {
-			image: "required",
-		});
+		const validator = new Validator((req.file.image = "required"));
 
 		const check = await validator.check();
 		if (!check) {
