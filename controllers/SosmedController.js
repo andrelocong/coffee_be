@@ -1,10 +1,11 @@
 import Sosmed from "../models/Sosmed.js";
 import { Validator } from "node-input-validator";
+import { v4 as uuidv4 } from "uuid";
 
 export const createSosmed = async (req, res) => {
 	try {
 		const validator = new Validator(req.body, {
-			name: "required|string",
+			sosmed: "required|string",
 			address: "required|string",
 		});
 
@@ -18,11 +19,12 @@ export const createSosmed = async (req, res) => {
 		}
 
 		const data = await Sosmed.create({
-			name: req.body.name,
+			sosmed_id: uuidv4(),
+			sosmed: req.body.sosmed.toLowerCase(),
 			address: req.body.address,
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Sosmed was created!",
 			data: data,
@@ -37,7 +39,7 @@ export const findAllSosmed = async (req, res) => {
 	try {
 		const data = await Sosmed.findAll();
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully find all data sosmed!",
 			data: data,
@@ -51,7 +53,7 @@ export const findAllSosmed = async (req, res) => {
 export const updateDataSosmed = async (req, res) => {
 	try {
 		const validator = new Validator(req.body, {
-			name: "required|string",
+			sosmed: "required|string",
 			address: "required|string",
 		});
 
@@ -66,7 +68,7 @@ export const updateDataSosmed = async (req, res) => {
 
 		const data = await Sosmed.update(
 			{
-				name: req.body.name,
+				sosmed: req.body.sosmed.toLowerCase(),
 				address: req.body.address,
 			},
 			{
@@ -76,7 +78,7 @@ export const updateDataSosmed = async (req, res) => {
 			}
 		);
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully update data sosmed!",
 			data: data,
@@ -95,7 +97,7 @@ export const deleteDataSosmed = async (req, res) => {
 			},
 		});
 
-		res.json({
+		res.status(200).json({
 			status: true,
 			message: "Successfully deleted data sosmed!",
 		});

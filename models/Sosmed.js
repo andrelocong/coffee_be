@@ -7,21 +7,14 @@ const Sosmed = db.define(
 	"sosmeds",
 	{
 		sosmed_id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 			primaryKey: true,
-			autoIncrement: true,
 		},
-		name: {
+		sosmed: {
 			type: DataTypes.STRING,
 		},
 		address: {
 			type: DataTypes.STRING,
-		},
-		createdAt: {
-			type: DataTypes.DATE,
-		},
-		updatedAt: {
-			type: DataTypes.DATE,
 		},
 	},
 	{
