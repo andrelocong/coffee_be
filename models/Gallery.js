@@ -7,21 +7,14 @@ const Gallery = db.define(
 	"galleries",
 	{
 		gallery_id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 			primaryKey: true,
-			autoIncrement: true,
 		},
 		category: {
 			type: DataTypes.STRING,
 		},
 		image: {
 			type: DataTypes.STRING,
-		},
-		createdAt: {
-			type: DataTypes.DATE,
-		},
-		updatedAt: {
-			type: DataTypes.DATE,
 		},
 	},
 	{

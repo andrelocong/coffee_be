@@ -1,5 +1,6 @@
 import Gallery from "../models/Gallery.js";
 import { Validator } from "node-input-validator";
+import { v4 as uuidv4 } from "uuid";
 
 export const uploadImage = async (req, res) => {
 	try {
@@ -30,11 +31,12 @@ export const uploadImage = async (req, res) => {
 			req.file.filename;
 
 		const gallery = await Gallery.create({
-			category: req.body.category,
+			gallery_id: uuidv4(),
+			category: req.body.category.toLowerCase(),
 			image: finalImageURL,
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully upload image!",
 			image: finalImageURL,
@@ -48,12 +50,12 @@ export const uploadImage = async (req, res) => {
 
 export const findAllGallery = async (req, res) => {
 	try {
-		const data = await Gallery.findAll();
+		const gallery = await Gallery.findAll();
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully to find all data gallery!",
-			gallery: data,
+			data: gallery,
 		});
 	} catch (error) {
 		console.log(error);
@@ -67,7 +69,7 @@ export const findGalleryByLimit = async (req, res) => {
 			limit: 6,
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully find all gallery by limit 6",
 			data: gallery,
@@ -86,7 +88,7 @@ export const deleteDataGallery = async (req, res) => {
 			},
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Successfully deleted data gallery!",
 		});
