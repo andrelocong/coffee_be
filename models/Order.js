@@ -12,9 +12,8 @@ const Order = db.define(
 	"orders",
 	{
 		order_id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 			primaryKey: true,
-			autoIncrement: true,
 		},
 		name: {
 			type: DataTypes.STRING,
@@ -26,31 +25,25 @@ const Order = db.define(
 			type: DataTypes.STRING,
 		},
 		product_id: {
-			type: DataTypes.INTEGER,
-		},
-		main_category_id: {
-			type: DataTypes.INTEGER,
-		},
-		category_id: {
-			type: DataTypes.INTEGER,
-		},
-		sub_category_id: {
-			type: DataTypes.INTEGER,
-		},
-		quantity_id: {
-			type: DataTypes.INTEGER,
-		},
-		note: {
-			type: DataTypes.TEXT,
-		},
-		status: {
 			type: DataTypes.STRING,
 		},
-		createdAt: {
-			type: DataTypes.DATE,
+		main_category_id: {
+			type: DataTypes.STRING,
 		},
-		updatedAt: {
-			type: DataTypes.DATE,
+		category_id: {
+			type: DataTypes.STRING,
+		},
+		sub_category_id: {
+			type: DataTypes.STRING,
+		},
+		quantity_id: {
+			type: DataTypes.STRING,
+		},
+		note: {
+			type: DataTypes.STRING,
+		},
+		status: {
+			type: DataTypes.INTEGER,
 		},
 	},
 	{
