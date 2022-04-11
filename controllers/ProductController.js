@@ -1,6 +1,7 @@
 import Product from "../models/Product.js";
 import { Op } from "sequelize";
 import { Validator } from "node-input-validator";
+import { v4 as uuidv4 } from "uuid";
 
 export const create = async (req, res) => {
 	try {
@@ -18,17 +19,16 @@ export const create = async (req, res) => {
 			});
 		}
 
-		//prettier-ignore
 		const product = await Product.create({
-			name: req.body.name,
-			category: req.body.category
+			product_id: uuidv4(),
+			name: req.body.name.toLowerCase(),
+			category: req.body.category,
 		});
 
-		//prettier-ignore
-		res.json({
-			"status"	: "true",
-			"message"	: "Product created successfully!",
-			"product"	: product
+		res.status(200).json({
+			status: "true",
+			message: "Product created successfully!",
+			product: product,
 		});
 	} catch (error) {
 		console.log(error);
@@ -41,11 +41,11 @@ export const findAll = async (req, res) => {
 		const data = await Product.findAll({
 			order: [["name", "ASC"]],
 		});
-		//prettier-ignore
-		res.json({
-			"status"	: "true",
-			"message"	: "Success to get all data product!",
-			"products"	: data
+
+		res.status(200).json({
+			status: "true",
+			message: "Success to get all data product!",
+			products: data,
 		});
 	} catch (error) {
 		console.log(error);
@@ -61,11 +61,10 @@ export const getDataById = async (req, res) => {
 			},
 		});
 
-		//prettier-ignore
-		res.json({
-			"status"	: "true",
-			"message"	: "Success to get data product by id!",
-			"data"		: data
+		res.status(200).json({
+			status: "true",
+			message: "Success to get data product by id!",
+			data: data,
 		});
 	} catch (error) {
 		console.log(error);
@@ -86,10 +85,9 @@ export const getDataByName = async (req, res) => {
 			order: [["name", "ASC"]],
 		});
 
-		//prettier-ignore
-		res.json({
-			"status"	: "true",
-			"data"		: data
+		res.status(200).json({
+			status: "true",
+			data: data,
 		});
 	} catch (error) {
 		console.log(error);
@@ -115,7 +113,7 @@ export const updateData = async (req, res) => {
 
 		const data = await Product.update(
 			{
-				name: req.body.name,
+				name: req.body.name.toLowerCase(),
 				category: req.body.category,
 			},
 			{
@@ -125,11 +123,10 @@ export const updateData = async (req, res) => {
 			}
 		);
 
-		//prettier-ignore
-		res.json({
-			"status"	: "true",
-			"message"	: "Success to update data product!",
-			"data"		: req.body
+		res.status(200).json({
+			status: "true",
+			message: "Success to update data product!",
+			data: req.body,
 		});
 	} catch (error) {
 		console.log(error);
@@ -145,10 +142,9 @@ export const deleteData = async (req, res) => {
 			},
 		});
 
-		//prettier-ignore
-		res.json({
-			"status"	: "true",
-			"message"	: "successfully deleted!"
+		res.status(200).json({
+			status: "true",
+			message: "successfully deleted!",
 		});
 	} catch (error) {
 		console.log(error);

@@ -9,21 +9,14 @@ const ProductSubCategory = db.define(
 	"product_sub_categories",
 	{
 		product_sub_category_id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 			primaryKey: true,
-			autoIncrement: true,
 		},
 		product_id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 		},
 		sub_category_id: {
-			type: DataTypes.INTEGER,
-		},
-		createdAt: {
-			type: DataTypes.DATE,
-		},
-		updatedAt: {
-			type: DataTypes.DATE,
+			type: DataTypes.STRING,
 		},
 	},
 	{

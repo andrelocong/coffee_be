@@ -44,7 +44,7 @@ export const createRoleAccess = async (req, res) => {
 		} else {
 			return res.status(400).json({
 				status: "false",
-				message: "Menu has been used 2",
+				message: "Menu has been used",
 			});
 		}
 	} catch (error) {

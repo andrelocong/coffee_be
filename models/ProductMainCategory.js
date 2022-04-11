@@ -9,21 +9,14 @@ const ProductMainCategory = db.define(
 	"product_main_categories",
 	{
 		product_main_category_id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 			primaryKey: true,
-			autoIncrement: true,
 		},
 		product_id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 		},
 		main_category_id: {
-			type: DataTypes.INTEGER,
-		},
-		createdAt: {
-			type: DataTypes.DATE,
-		},
-		updatedAt: {
-			type: DataTypes.DATE,
+			type: DataTypes.STRING,
 		},
 	},
 	{
