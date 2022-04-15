@@ -1,5 +1,10 @@
 import express from "express";
 import { upload } from "../config/multer.js";
+import { verifyToken } from "../middleware/VerifyToken.js";
+
+const router = express.Router();
+
+router.use(verifyToken);
 
 import {
 	create,
@@ -108,9 +113,6 @@ import {
 	findAllRoleAccess,
 	updateDataRoleAccess,
 } from "../controllers/RoleAccessController.js";
-import { logins } from "../controllers/AuthController.js";
-
-const router = express.Router();
 
 router.get("/product/find", getDataByName);
 router.post("/product", create);
@@ -191,7 +193,5 @@ router.post("/role-access", createRoleAccess);
 router.get("/role-access/:id", findAllRoleAccess);
 router.patch("/role-access/:id", updateDataRoleAccess);
 router.delete("/role-access/:id", deleteDataRoleAccess);
-
-router.post("/logins", logins);
 
 export default router;

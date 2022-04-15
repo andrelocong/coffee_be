@@ -63,6 +63,14 @@ export const createUser = async (req, res) => {
 export const findAllUser = async (req, res) => {
 	try {
 		const user = await User.findAll({
+			attributes: [
+				"first_name",
+				"last_name",
+				"username",
+				"email",
+				"image",
+				"phone",
+			],
 			include: [Role],
 		});
 
@@ -72,7 +80,7 @@ export const findAllUser = async (req, res) => {
 				message: "Data user empty!",
 			});
 		} else {
-			res.json({
+			res.status(200).json({
 				status: "true",
 				message: "Successfully find all data user!",
 				data: user,
@@ -87,13 +95,21 @@ export const findAllUser = async (req, res) => {
 export const findOneByIdUser = async (req, res) => {
 	try {
 		const user = await User.findOne({
+			attributes: [
+				"first_name",
+				"last_name",
+				"username",
+				"email",
+				"image",
+				"phone",
+			],
 			include: [Role],
 			where: {
 				user_id: req.params.id,
 			},
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Success find data by id!",
 			data: user,
@@ -139,7 +155,7 @@ export const updateDataUser = async (req, res) => {
 			}
 		);
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "User data was updated!",
 		});
@@ -180,7 +196,7 @@ export const updateImageUser = async (req, res) => {
 			}
 		);
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "Image user was updated!",
 			image: finalImageURL,
@@ -199,7 +215,7 @@ export const deleteDataUser = async (req, res) => {
 			},
 		});
 
-		res.json({
+		res.status(200).json({
 			status: "true",
 			message: "User data was deleted!",
 		});

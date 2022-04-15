@@ -34,7 +34,7 @@ const User = db.define(
 		},
 		phone: {
 			type: DataTypes.STRING,
-		}
+		},
 	},
 	{
 		freezeTableName: true,
