@@ -29,25 +29,87 @@ export const createOrder = async (req, res) => {
 			});
 		}
 
-		const order = await Order.create({
-			order_id: uuidv4(),
-			name: req.body.name.toLowerCase(),
-			phone: req.body.phone,
-			email: req.body.email,
-			product_id: req.body.productId,
-			main_category_id: req.body.mainCategoryId,
-			category_id: req.body.categoryId,
-			sub_category_id: req.body.subCategoryId,
-			quantity_id: req.body.quantityId,
-			note: req.body.note.toLowerCase(),
-			status: 0,
-		});
+		if (req.body.mainCategoryId === "null") {
+			const order = await Order.create({
+				order_id: uuidv4(),
+				name: req.body.name.toLowerCase(),
+				phone: req.body.phone,
+				email: req.body.email,
+				product_id: req.body.productId,
+				main_category_id: null,
+				category_id: req.body.categoryId,
+				sub_category_id: req.body.subCategoryId,
+				quantity_id: req.body.quantityId,
+				note: req.body.note.toLowerCase(),
+				status: 0,
+			});
 
-		res.status(200).json({
-			status: "true",
-			message: "Order was created!",
-			data: order,
-		});
+			res.status(200).json({
+				status: "true",
+				message: "Order was created!",
+				data: order,
+			});
+		} else if (req.body.categoryId === "null") {
+			const order = await Order.create({
+				order_id: uuidv4(),
+				name: req.body.name.toLowerCase(),
+				phone: req.body.phone,
+				email: req.body.email,
+				product_id: req.body.productId,
+				main_category_id: req.body.mainCategoryId,
+				category_id: null,
+				sub_category_id: req.body.subCategoryId,
+				quantity_id: req.body.quantityId,
+				note: req.body.note.toLowerCase(),
+				status: 0,
+			});
+
+			res.status(200).json({
+				status: "true",
+				message: "Order was created!",
+				data: order,
+			});
+		} else if (req.body.subCategoryId === "null") {
+			const order = await Order.create({
+				order_id: uuidv4(),
+				name: req.body.name.toLowerCase(),
+				phone: req.body.phone,
+				email: req.body.email,
+				product_id: req.body.productId,
+				main_category_id: req.body.mainCategoryId,
+				category_id: req.body.categoryId,
+				sub_category_id: null,
+				quantity_id: req.body.quantityId,
+				note: req.body.note.toLowerCase(),
+				status: 0,
+			});
+
+			res.status(200).json({
+				status: "true",
+				message: "Order was created!",
+				data: order,
+			});
+		} else {
+			const order = await Order.create({
+				order_id: uuidv4(),
+				name: req.body.name.toLowerCase(),
+				phone: req.body.phone,
+				email: req.body.email,
+				product_id: req.body.productId,
+				main_category_id: req.body.mainCategoryId,
+				category_id: req.body.categoryId,
+				sub_category_id: req.body.subCategoryId,
+				quantity_id: req.body.quantityId,
+				note: req.body.note.toLowerCase(),
+				status: 0,
+			});
+
+			res.status(200).json({
+				status: "true",
+				message: "Order was created!",
+				data: order,
+			});
+		}
 	} catch (error) {
 		console.log(error);
 		res.status(500).json("server error...");
