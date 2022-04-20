@@ -19,6 +19,7 @@ const Product = db.define(
 	},
 	{
 		freezeTableName: true,
+		paranoid: true,
 	}
 );
 
