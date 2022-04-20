@@ -64,6 +64,7 @@ export const findAllUser = async (req, res) => {
 	try {
 		const user = await User.findAll({
 			attributes: [
+				"user_id",
 				"first_name",
 				"last_name",
 				"username",
@@ -96,6 +97,7 @@ export const findOneByIdUser = async (req, res) => {
 	try {
 		const user = await User.findOne({
 			attributes: [
+				"user_id",
 				"first_name",
 				"last_name",
 				"username",
