@@ -50,6 +50,25 @@ export const findAllSosmed = async (req, res) => {
 	}
 };
 
+export const findOneSosmed = async (req, res) => {
+	try {
+		const data = await Sosmed.findOne({
+			where: {
+				sosmed: req.query.sosmed,
+			},
+		});
+
+		return res.status(200).json({
+			status: "true",
+			message: "get one data sosmed by name",
+			data: data,
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(500).json("server error...");
+	}
+};
+
 export const updateDataSosmed = async (req, res) => {
 	try {
 		const validator = new Validator(req.body, {

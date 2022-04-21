@@ -178,7 +178,6 @@ router.post("/product-sub-category", createProductSubCategory);
 router.get("/product-sub-category/:id", findAllProductSubCategory);
 router.delete("/product-sub-category/:id", deleteDataProductSubCategory);
 
-router.post("/order", createOrder);
 router.get("/order", findAllOrder);
 router.get("/order/:id", findOrderById);
 router.patch("/order/status/:id", updateOrderStatus);
