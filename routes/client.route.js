@@ -1,5 +1,5 @@
 import express from "express";
-import { login, logout, logouts } from "../controllers/AuthController.js";
+import { login } from "../controllers/AuthController.js";
 import {
 	findAllGallery,
 	findGalleryByLimit,
@@ -35,7 +35,5 @@ router.get("/team", findALlTeam);
 router.get("/sosmed", findOneSosmed);
 
 router.post("/login", login);
-router.delete("/logout", logout);
-router.delete("/logouts", logouts);
 
 export default router;

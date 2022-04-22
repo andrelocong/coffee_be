@@ -32,10 +32,8 @@ export const login = async (req, res) => {
 			const passMatch = await bcrypt.compare(submitPass, storedPass);
 			if (passMatch) {
 				const userId = user.user_id;
-				const username = user.username;
-				const firstName = user.first_name;
 				const accessToken = jwt.sign(
-					{ username, firstName },
+					{ userId },
 					process.env.JWT_PRIVATE_TOKEN,
 					{
 						expiresIn: "1h",
@@ -52,37 +50,4 @@ export const login = async (req, res) => {
 		console.log(error);
 		return response(res, 500, "server error...");
 	}
-};
-
-export const logout = async (req, res) => {
-	try {
-		const token = tokenGlobal;
-		if (!token) {
-			return res.status(204);
-		} else {
-			const user = await User.findOne({
-				where: {
-					refresh_token: token,
-				},
-			});
-
-			if (!user) {
-				return res.status(204);
-			} else {
-				return res.status(200).json({
-					status: true,
-					message: "Successfully to logout",
-				});
-			}
-		}
-	} catch (error) {
-		console.log(error);
-		res.status(500).json("server error...");
-	}
-};
-
-export const logouts = async (req, res) => {
-	refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
-	res.clearCookie("refreshToken");
-	res.sendStatus(204);
 };

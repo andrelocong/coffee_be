@@ -45,6 +45,7 @@ import {
 	findAllUser,
 	updateDataUser,
 	updateImageUser,
+	findImageProfile,
 } from "../controllers/UserController.js";
 
 import {
@@ -95,7 +96,6 @@ import {
 } from "../controllers/ProductSubCategoryController.js";
 
 import {
-	createOrder,
 	deleteDataOrder,
 	findAllOrder,
 	findOrderById,
@@ -113,6 +113,13 @@ import {
 	findAllRoleAccess,
 	updateDataRoleAccess,
 } from "../controllers/RoleAccessController.js";
+
+import {
+	findOneById,
+	updateDataProfile,
+	updateImageProfile,
+	updatePasswordProfile,
+} from "../controllers/ProfileController.js";
 
 router.get("/product/find", getDataByName);
 router.post("/product", create);
@@ -144,6 +151,7 @@ router.patch("/user/:id", updateDataUser);
 router.patch("/user/image/:id", upload.single("image"), updateImageUser);
 router.delete("/user/:id", deleteDataUser);
 router.get("/user/:id", findOneByIdUser);
+router.post("/user/image/profile/:id", findImageProfile);
 
 router.post("/main-category", createMainCategory);
 router.get("/main-category", findAllMainCategory);
@@ -192,5 +200,10 @@ router.post("/role-access", createRoleAccess);
 router.get("/role-access/:id", findAllRoleAccess);
 router.patch("/role-access/:id", updateDataRoleAccess);
 router.delete("/role-access/:id", deleteDataRoleAccess);
+
+router.get("/profile/:id", findOneById);
+router.patch("/profile/:id", updateDataProfile);
+router.post("/profile/:id", upload.single("image"), updateImageProfile);
+router.post("/profile/password/:id", updatePasswordProfile);
 
 export default router;

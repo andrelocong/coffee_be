@@ -122,6 +122,26 @@ export const findOneByIdUser = async (req, res) => {
 	}
 };
 
+export const findImageProfile = async (req, res) => {
+	try {
+		const user = await User.findOne({
+			attributes: ["image"],
+			where: {
+				user_id: req.params.id,
+			},
+		});
+
+		res.status(200).json({
+			status: true,
+			message: "find image profile by id",
+			data: user,
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(500).json("server error...");
+	}
+};
+
 export const updateDataUser = async (req, res) => {
 	try {
 		const validator = new Validator(req.body, {
